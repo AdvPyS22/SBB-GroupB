@@ -1,2 +1,0 @@
-# SBB-GroupB
-SBB analysis 
