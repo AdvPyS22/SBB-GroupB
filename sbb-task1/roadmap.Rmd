@@ -1,0 +1,38 @@
+---
+title: "ROADMAP"
+output: html_document
+---
+
+
+
+# Introduction
+We analyze the SBB dataset and create the code that users can use directly to get what they want, like if they can enter a station name, then they run the code, they will get all the clock statistics information. Also, users can dynamically select which information to plot and enter new information in the databases.  
+
+# Milestones  
+
+## Step 1: Project management and first deliverable . . . . . . . . . . . . . . Deadline: April 28
+- Data acquisition, Data cleaning, Descriptive statistical analysis information about which clocks exist in which train stations.  
+- Users can run the code file to get statistics they want.  
+- Code the first task (Task 1 / 3). 
+  
+## Step 2: GitHub and second deliverable . . . . . . . . . . . . . . . . . . . . . . Deadline: May 5
+- Plot information about ramps / stairs and allow users to dynamically select which information to plot.  
+- Upload all the file into GitHub repository and following steps are related to GitHub repository.
+- Code the second task (Task 2 / 3). 
+ 
+## Step 3: Classes and refactoring . . . . . . . . . . . . . . . . . . . . . . . . . . . . Deadline: May 12  
+- Improve my code using pylint feedback.  
+- Refactor the code I have delivered to my repository.  
+- Provide feedback to another group in the form of an issue on their project.  
+- Re-implement at least one part of submitted code as a class.  
+  
+## Step 4: Unit tests and issues . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . Deadline: May 19  
+- Implement at least one set of try and except blocks in project.  
+- Implement a meaningful unit test with at least four test cases.  
+ 
+## Step 5: Third deliverable, presentation and virtual environment . . . . Deadline: June 2  
+- Allow users to enter new information in the databases.  
+- Prepare a csv file where users can write new information.  
+- Set-up a virtual environment that can run project. 
+- Present the final results in class.
+- Code the third task (Task 3 / 3).
