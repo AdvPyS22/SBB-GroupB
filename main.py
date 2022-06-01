@@ -3,8 +3,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.backends.backend_pdf
-
-#data = pd.read_csv('./haltestelle-uhr.csv', sep=';')
+#import re
 
 
 def main():
@@ -13,6 +12,7 @@ def main():
         data = pd.read_csv('./haltestelle-uhr.csv', sep=';')
     except FileNotFoundError:
         print("Sorry, the file does not exist")
+    ## clean data
     sum(data['Line'].isnull())  # 0
     sum(data['KM'].isnull())  # 0
     sum(data['Stop name'].isnull())  # 0
@@ -30,6 +30,8 @@ def main():
     data['Second hand'] = data['Second hand'].fillna(data['Second hand'].mode()[0])
     sum(data['FID'].isnull())
     sum(data['Geopos'].isnull())
+    
+    ##get the input name
     station = input("Please input the station name: ").strip().lower().title()
     while station not in list(data['Stop name']):
         print('Please input right station name!')
@@ -59,6 +61,8 @@ def main():
     for fig in [fig1, fig2, fig3, fig4, fig5]:
         pdf.savefig(fig)
     pdf.close()
+    
+    
     # task2
     try:
         data2 = pd.read_csv('./rampe-treppe.csv', sep=';')
@@ -111,6 +115,29 @@ def main():
     elif var2 == 'all':
         Draw.Pie(var1_data, var1)
         Draw.Bar(var1_data, var1)
+    
+    ##enter some information to the csv file
+    print("If you wanna enter some new information into the file: enter 'y'")
+    m = input()
+    if m == 'y':
+        print("which file you wanna to enter the information:\
+              1. file about clocks exist in which train stations\
+              2. file about ramps / stairs\
+              3. both\
+                  [just enter the number]")
+        file = int(input())
+        if file == 1:
+            name = "./haltestelle-uhr.csv"
+            write_csv(name,data)
+        elif file == 2:
+            name = './rampe-treppe.csv'
+            write_csv(name,data2)
+        elif file == 3:
+            name1 = "./haltestelle-uhr.csv"
+            write_csv(name1,data)
+            name2 = './rampe-treppe.csv'
+            write_csv(name2,data2)
+            
 
 def get_plot_data(result, column):
     """
@@ -185,6 +212,28 @@ class Draw():
         plt.title(var)
         plt.show()
 
+def write_csv(name,data):
+    with open(name,'a+') as f:
+        print(name)
+        print("According to the fllowing information to enter the new infromation\
+              enter 'y'to continue.")
+        print(data.head())
+        continue_file = input(" Are you ready to enter the new information to the file?\
+                              enter 'y' to continue.")
+        while continue_file == 'y':
+            new_information = '' 
+            continue_step = continue_file 
+            while continue_step =='y':
+                new_information += input(">>>enter the information")
+                continue_step = input("Are you still need to enter the information for one row:\
+                                      enter 'y' to continue.")
+            f.write(new_information)
+            
+            continue_file=input('Are you still wanna enter the information?\
+                              enter "y"to continue.')
+        
+        
+        
 
 # call main
 if __name__ == "__main__":
