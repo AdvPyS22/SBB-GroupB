@@ -9,10 +9,7 @@ import matplotlib.backends.backend_pdf
 
 def main():
     """call other functions in main()"""
-    try:
-        data = pd.read_csv('./haltestelle-uhr.csv', sep=';')
-    except FileNotFoundError:
-        print("Sorry, the file does not exist")
+    data = pd.read_csv('./haltestelle-uhr.csv', sep=';')
     sum(data['Line'].isnull())  # 0
     sum(data['KM'].isnull())  # 0
     sum(data['Stop name'].isnull())  # 0
@@ -60,11 +57,6 @@ def main():
         pdf.savefig(fig)
     pdf.close()
     # task2
-    try:
-        data2 = pd.read_csv('./rampe-treppe.csv', sep=';')
-        data2 = data2.dropna(subset=['Use'])
-    except FileNotFoundError:
-        print("Sorry, the file does not exist")
     data2 = pd.read_csv('./rampe-treppe.csv', sep=';')
     data2 = data2.dropna(subset=['Use'])
     sum(data2['Station abbreviation'].isnull())  # 0
@@ -93,7 +85,7 @@ def main():
              'Length', 'DIFF H=', 'FID']
     print(mabel)
     plt.figure(figsize=(8, 6))
-    plt.pie(y_data, labels=mabel)
+    plt.pie(y_data, labels=mabel, startangle=90)
     plt.title("Information statistics")
     plt.show()
     # plot pie chart
@@ -112,17 +104,15 @@ def main():
         Draw.Pie(var1_data, var1)
         Draw.Bar(var1_data, var1)
 
+
 def get_plot_data(result, column):
     """
     get the data from dataframe,count and drop duplicate,respectly,
     as of data and label of plot
     """
-    try:
-        data_result = result[column].value_counts()
-        labels = result[column].drop_duplicates()
-        return data_result, labels
-    except:
-        print("Error in getting station data ")
+    data_result = result[column].value_counts()
+    labels = result[column].drop_duplicates()
+    return data_result, labels
 
 
 def draw_fig(data_input, labels):
@@ -152,6 +142,7 @@ def deal_data(dataframe):
     return dict(result)
 
 
+
 class Draw():
     '''
     Choose different type of result to show
@@ -162,8 +153,9 @@ class Draw():
         '''
         draw bar according to task2
         '''
-        label = self.keys()
-        value_1 = self.values()
+        dic = self
+        label = dic.keys()
+        value_1 = dic.values()
         #print(label, value_1)
         plt.bar(label,value_1, width=0.3,
                 color=['b', 'r', 'g', 'y', 'c', 'm', 'y', 'k', 'c', 'g', 'g'])
@@ -179,13 +171,11 @@ class Draw():
         '''
         draw pie according to task2
         '''
-        label = self.keys()
-        value_1 = self.values()
+        dic = self
+        label = dic.keys()
+        value_1 = dic.values()
         plt.pie(value_1, labels = label, startangle=90)
         plt.title(var)
         plt.show()
-
-
 # call main
-if __name__ == "__main__":
-    main()
+main()
