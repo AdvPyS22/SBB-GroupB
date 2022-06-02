@@ -5,6 +5,7 @@ We analyze the SBB dataset and create the code that users can use directly to ge
 
 # Usage
 - Download the zip file. Decompressing the file. Enter the file.
+- check the requirement.txt, and check if you have all the package you needed in your computer. Or you can **pip install -r requirement.txt**
 - Open **main.py** file. And run it.
 - You will be asked to input the station name you are interested and you will get the statistics information, a pdf file(named 'input name'-output.pdf),about clock. Don't care about capitalization and spaces before and after characters of the name.  
 For example, if you are interested in 'bern' station clock information. You can input 'Bern' '  BERN' or "BERn'. Then you will get a pdf file, called **Bern-output.pdf**, which shows you statistics information about clock.
