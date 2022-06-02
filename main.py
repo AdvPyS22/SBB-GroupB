@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.backends.backend_pdf
-#import re
+import re
 
 
 def main():
@@ -33,10 +33,19 @@ def main():
     
     ##get the input name
     station = input("Please input the station name: ").strip().lower().title()
-    while station not in list(data['Stop name']):
+   # print(set(data['Stop name']))
+
+    
+    r = re.compile(station+'.*$')
+    #newlist = list(filter(r.match, set(data['Stop name']))) # Read Note below
+    #print(newlist)
+    while not list(filter(r.match, set(data['Stop name']))):
         print('Please input right station name!')
-        station = input("Please input the station name: ").strip().lower().title()
-    result = data[data['Stop name'] == station]
+        station = input("Please input the station name: ").strip().lower().title()    
+   # while station not in list(data['Stop name']):
+        #print('Please input right station name!')
+        #station = input("Please input the station name: ").strip().lower().title()
+    result = data[data['Stop name'] == re.search(station+ '.*',str(data['Stop name']))]
     data_1, labels_1 = get_plot_data(result, 'Line')
     data_2, labels_2 = get_plot_data(result, 'Befestigung Auswahl')
     data_3, labels_3 = get_plot_data(result, 'Type of display')
